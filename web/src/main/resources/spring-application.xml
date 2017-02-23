@@ -19,11 +19,11 @@ http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
     </context:component-scan>
 
     <!-- 请求映射 分别配置了 文本消息，json消息，xml消息的映射-->
-    <mvc:annotation-driven>
-        <mvc:message-converters register-defaults="false">
+    <mvc:annotation-driven />
+        <!--<mvc:message-converters register-defaults="true">
             <bean class="org.springframework.http.converter.StringHttpMessageConverter">
                 <constructor-arg value="UTF-8"></constructor-arg>
-                <!-- 避免出现乱码 -->
+                &lt;!&ndash; 避免出现乱码 &ndash;&gt;
                 <property name="supportedMediaTypes">
                     <list>
                         <value>text/plain;charset=UTF-8</value>
@@ -34,7 +34,7 @@ http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
                 <property name="supportedMediaTypes">
                     <list>
                         <value>application/json;charset=UTF-8</value>
-                        <value>text/html;charset=UTF-8</value><!-- 避免IE出现下载JSON文件的情况 -->
+                        <value>text/html;charset=UTF-8</value>&lt;!&ndash; 避免IE出现下载JSON文件的情况 &ndash;&gt;
                     </list>
                 </property>
                 <property name="defaultCharset" value="UTF-8"></property>
@@ -50,7 +50,7 @@ http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
                 </property>
             </bean>
         </mvc:message-converters>
-    </mvc:annotation-driven>
+    </mvc:annotation-driven>-->
 
     <bean id="castorMarshaller" class="org.springframework.oxm.castor.CastorMarshaller"></bean>
 
@@ -60,7 +60,45 @@ http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
     <mvc:resources mapping="/resource/**" location="/static/" />
 
     <bean id="placeholderConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="location" value="classpath*:sysconfig/*.properties"/>
+        <property name="locations" value="classpath*:dubbo/*.properties"/>
         <property name="fileEncoding" value="UTF-8"></property>
+    </bean>
+
+    <import resource="classpath*:dubbo/dubbo-consumer.xml"/>
+
+    <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+        <property name="contentNegotiationManager" ref="contentNegotiationManager" />
+        <property name="defaultViews">
+            <list>
+                <bean class="com.alibaba.fastjson.support.spring.FastJsonJsonView"/>
+                <!--<bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />-->
+                <bean id="xmlView"  class="org.springframework.web.servlet.view.xml.MarshallingView">
+                    <constructor-arg>
+                        <bean class="org.springframework.oxm.xstream.XStreamMarshaller"/>
+                    </constructor-arg>
+                </bean>
+            </list>
+        </property>
+        <property name="viewResolvers">
+            <list>
+                <bean class="org.springframework.web.servlet.view.BeanNameViewResolver" />
+                <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+                    <property name="prefix" value="/page/" />
+                    <property name="suffix" value=".jsp" />
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+        <property name="favorParameter" value="false" />
+        <property name="ignoreAcceptHeader" value="true" />
+        <property name="defaultContentType" value="text/html" />
+        <property name="mediaTypes">
+            <map>
+                <entry key="json" value="application/json" />
+                <entry key="xml" value="application/xml" />
+            </map>
+        </property>
     </bean>
 </beans>

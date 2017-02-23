@@ -8,4 +8,6 @@ import com.zhang.entity.User;
 public interface UserService {
 
     public User getUser(String id);
+
+    public int addUser(User user);
 }

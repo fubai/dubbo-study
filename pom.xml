@@ -27,6 +27,8 @@
     <zookeeper.version>3.4.9</zookeeper.version>
     <aspectj.version>1.8.10</aspectj.version>
     <zkclient.version>0.10</zkclient.version>
+    <xstream.version>1.4.9</xstream.version>
+    <castor.version>1.2</castor.version>
   </properties>
 
   <dependencyManagement>
@@ -120,6 +122,21 @@
         <groupId>com.101tec</groupId>
         <artifactId>zkclient</artifactId>
         <version>${zkclient.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.thoughtworks.xstream</groupId>
+        <artifactId>xstream</artifactId>
+        <version>${xstream.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.codehaus.castor</groupId>
+        <artifactId>castor</artifactId>
+        <version>${castor.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.thoughtworks.xstream</groupId>
+        <artifactId>xstream</artifactId>
+        <version>${xstream.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
