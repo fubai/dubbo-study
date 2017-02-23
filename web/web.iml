@@ -33,5 +33,7 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-oxm:4.3.6.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: com.alibaba:fastjson:1.2.24" level="project" />
     <orderEntry type="module" module-name="facade" />
+    <orderEntry type="library" name="Maven: tk.mybatis:mapper:3.4.0" level="project" />
+    <orderEntry type="library" name="Maven: javax.persistence:persistence-api:1.0" level="project" />
   </component>
 </module>

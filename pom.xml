@@ -24,10 +24,23 @@
     <druid.version>1.0.28</druid.version>
     <mysql.version>6.0.5</mysql.version>
     <dubbo.version>2.5.3</dubbo.version>
+    <zookeeper.version>3.4.9</zookeeper.version>
+    <aspectj.version>1.8.10</aspectj.version>
+    <zkclient.version>0.10</zkclient.version>
   </properties>
 
   <dependencyManagement>
     <dependencies>
+      <dependency>
+        <groupId>org.aspectj</groupId>
+        <artifactId>aspectjrt</artifactId>
+        <version>${aspectj.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.aspectj</groupId>
+        <artifactId>aspectjweaver</artifactId>
+        <version>${aspectj.version}</version>
+      </dependency>
       <dependency>
         <groupId>org.springframework</groupId>
         <artifactId>spring-context</artifactId>
@@ -97,6 +110,16 @@
         <groupId>com.alibaba</groupId>
         <artifactId>dubbo</artifactId>
         <version>${dubbo.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.zookeeper</groupId>
+        <artifactId>zookeeper</artifactId>
+        <version>${zookeeper.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.101tec</groupId>
+        <artifactId>zkclient</artifactId>
+        <version>${zkclient.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
